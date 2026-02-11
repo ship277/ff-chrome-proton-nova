@@ -11,8 +11,6 @@
             
             /*Some color overrides to replace that stupid blue border with the real accent color*/
             --color-accent-primary: accentcolor !important;
-            --color-accent-primary-hover: light-dark(var(--color-blue-70), var(--color-cyan-20));
-            --color-accent-primary-active: light-dark(var(--color-blue-80), var(--color-cyan-10));
             --color-accent-primary-selected: var(--color-accent-primary) !important;
         }
     }
