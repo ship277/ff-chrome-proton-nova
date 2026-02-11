@@ -12,6 +12,12 @@
   --tab-hover-outline-color: accentcolor !important;
 }
 
+@media not ((forced-colors) or (-moz-native-theme)) {
+  :root:not([lwtheme]) {
+    --color-accent-primary: accentcolor !important;
+  }
+}
+
 #main-window {
   background-size: cover;
 }
@@ -61,7 +67,7 @@ tab {
     overflow: visible !important;
   }
   .tab-icon-image {
-    scale: 1.25 !important;
+    scale: 1.4 !important;
   }
 }
 
@@ -74,14 +80,9 @@ tab-split-view-wrapper tab{
   padding: 3px 0 2px 0!important;
 }
 .urlbar-background, #searchbar {
-  background-color: var(--toolbar-field-focus-background-color) !important;
 }
 
 /*Sidebar fixes:*/
-#sidebar-main {
-  margin-right: calc(var(--vertical-splitter-thickness) * -1) !important;
-}
-
 #sidebar {
   box-shadow: none !important;
   outline: none !important;
@@ -113,6 +114,10 @@ tab-split-view-wrapper tab{
   &:hover {
     background-color: unset !important;
   }
+}
+
+#sidebar-launcher-splitter {
+  margin-left: calc(var(--vertical-splitter-thickness) * -1) !important;
 }
 
 /*Tmp:*/

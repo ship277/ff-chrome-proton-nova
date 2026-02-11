@@ -28,7 +28,7 @@
             box-shadow: unset !important;
         }
         &:is(:hover, :focus) {
-            background-color: color-mix(in srgb, currentColor 18%, transparent);
+            background-color: color-mix(in srgb, currentColor 15%, transparent);
         }
     }
   
@@ -48,5 +48,21 @@
             0 2px 0 0 var(--newtab-primary-action-background-dimmed) !important;
         border-radius: 0px 0px 8px 8px !important;
         border-top: none !important;
+        * {
+        font-size: 0.95rem !important;
+        }
+    }
+    .contentSearchSuggestionRow.remote > td > .historyIcon {
+        visibility: visible !important;
+    }
+    .contentSearchHeaderRow, .contentSearchHeaderRow td, .contentSearchSuggestionsContainer, .contentSearchOneOffItem {
+        border: none !important;
+    }
+    .contentSearchSuggestionTable .contentSearchSuggestionRow {
+        display: block !important;
+        margin: 5px  !important;
+        &.selected {
+            border-radius: 8px !important;
+        }
     }
 }
