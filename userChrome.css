@@ -43,7 +43,6 @@
 
 /*Tabs fixes:*/
 tab {
-  overflow: visible !important;
   &[selected="true"] .tab-background{
     background-color: accentcolor !important;
     box-shadow: none !important;
@@ -53,8 +52,17 @@ tab {
   }
 }
 
-#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tab-icon-image {
-  scale: 1.25 !important;
+#TabsToolbar {
+  margin: 0 4px !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+  tab {
+    overflow: visible !important;
+  }
+  .tab-icon-image {
+    scale: 1.25 !important;
+  }
 }
 
 tab-split-view-wrapper tab{
