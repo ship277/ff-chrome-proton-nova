@@ -1,0 +1,153 @@
+/*global overrides*/
+:root {
+  /*personal global variables:*/
+  --myaccent: color-mix(in srgb, accentcolor 40%, #0F0F0F); /*I prefer no accentcolor here*/
+  --transition-anim: 0.4s ease-in-out;
+  --blur-amnt: 9px;
+  --uP: 8px; /*the padding that's around and between everything, "universal padding". don't decrease below 5!!*/
+  --uR: 10px; /*take a wild fucking guess*/
+  --splitter-thickness: 3px;
+  --accentLight: color-mix(in srgb, accentcolor 60%, transparent);
+  --accentAccent: color-mix(in srgb, accentcolor 25%, transparent);
+  
+  /*default overrides:*/
+  --toolbar-bgcolor: unset !important;
+  --toolbar-field-background-color: var(--myaccent) !important;
+  --toolbar-field-focus-background-color: var(--toolbar-field-background-color) !important;
+  
+  --background-color-canvas: var(--myaccent) !important;
+}
+
+#main-window {
+  background-size: cover;
+}
+
+#browser{
+  outline: none !important;
+  padding: calc(var(--uP) - 2px) var(--uP) var(--uP) var(--uP)!important;
+}
+
+#tabbrowser-tabbox {
+  outline: none !important;
+  overflow: hidden !important;
+  border-radius: var(--uR) !important;
+  box-shadow: none !important;
+}
+
+#tabbrowser-tabpanels, #browser {
+  background-color: unset !important;
+}
+.browserStack {
+  outline: none !important;
+}
+.browserSidebarContainer {
+  margin: 0 !important;
+}
+
+/*tabs & top bar fixes*/
+#navigator-toolbox {
+  background-color: unset !important;
+  padding: var(--uP) calc(var(--uP) - 9px) 2px calc(var(--uP) - 7px) !important;
+	border: none !important;
+}
+
+#urlbar-container, #urlbar-container:has(#urlbar[breakout][breakout-extend]) {
+  padding: 0 !important;
+  border-radius: var(--urlbar-inner-border-radius) !important;
+}
+.urlbar {
+  &[breakout][breakout-extend="true"] {
+    .urlbar-background {
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5) !important;
+      top: -3px !important;
+      background-color: var(--myaccent) !important;
+    }
+  }
+  &[focused] .urlbar-background {
+    outline: none !important;
+    border: solid 2px AccentColor  !important;
+  }
+}
+
+.tabbrowser-tab {
+  overflow: visible !important;
+  &[selected="true"] {
+    .tab-background {
+      background-color: var(--myaccent) !important;
+      box-shadow: none !important;
+    }
+  }
+  .tab-icon-image {
+  transition: var(--transition-anim) !important;
+  }
+}
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+    .tab-icon-image {
+      scale: 1.25 !important;
+    }
+    .tab-close-button {
+      padding: 2px !important;
+      background-color: accentcolor !important;
+    }
+}
+tab-split-view-wrapper {
+  outline: solid 2px var(--accentLight) !important;
+  background-color: var(--accentAccent) !important;
+  margin: 8px auto 4px;
+  & .tabbrowser-tab {
+    border: none !important;
+  }
+}
+
+/*sidebar fix*/
+#sidebar-main {
+  margin: -7px -9px !important;
+}
+
+#sidebar-box {
+  padding: 0px !important;
+  border-radius: var(--uR) !important;
+}
+
+#sidebar-box[sidebarcommand="viewCPMSidebar"] body {
+  display: none !important;
+}
+
+#sidebar {
+  background-color: var(--myaccent) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.sidebar-panel * {
+    color: -moz-sidebartext !important;
+}
+
+/*splitters fix*/
+.split-view-splitter {
+  background-color: unset !important;
+  width: var(--uP) !important;
+  border: unset !important;
+}
+
+#sidebar-tools-and-extensions-splitter, #vertical-pinned-tabs-splitter {
+  background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
+  border-radius: var(--border-radius-medium) !important;
+  transition: background-color, var(--transition-anim) !important;
+  
+  height: var(--splitter-thickness) !important;
+  background-clip: padding-box !important;
+  margin-block-end: 0 !important;
+  border: none !important;
+  &:hover {
+    background-color: AccentColor !important;
+  }
+}
+
+.sidebar-splitter {
+  width: var(--uP) !important;
+  border: none !important;
+  &:hover {
+    background-color: unset !important;
+  }
+}

@@ -1,0 +1,98 @@
+/*Global overrides:*/
+:root {
+  /*Custom variables:*/
+  --horizontal-splitter-thickness: 3px;
+  --vertical-splitter-thickness: 7px;
+  /*Default overrides:*/
+  --toolbar-bgcolor: -moz-dialog !important;
+  --toolbox-bgcolor: var(--toolbar-bgcolor) !important;
+  --toolbox-bgcolor-inactive: var(--toolbar-bgcolor) !important;
+  
+  --tab-hover-background-color: color-mix(in srgb, accentcolor 40%, transparent) !important;
+  --tab-hover-outline-color: accentcolor !important;
+}
+
+#main-window {
+  background-size: cover;
+}
+
+/*Browser fixes:*/
+#browser{
+  outline: none !important;
+}
+
+.browserSidebarContainer {
+  margin: 0 !important;
+}
+
+.browserStack {
+  outline: none !important; /*the outline isn't displayed properly because of the hidden overflow in the rule below (it's necessary for the rounded corners)*/
+}
+
+#tabbrowser-tabbox {
+  outline: none !important;
+  margin: 0 7px 7px 0 !important;
+  overflow: hidden !important;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+}
+
+#tabbrowser-tabpanels{
+  background-color: unset !important;
+}
+
+/*Tabs fixes:*/
+tab {
+  overflow: visible !important;
+  &[selected="true"] .tab-background{
+    background-color: accentcolor !important;
+    box-shadow: none !important;
+  }
+  .tab-icon-image {
+  transition: var(--transition-anim) !important;
+  }
+}
+
+tab-split-view-wrapper tab{
+  border-color: var(--tab-hover-outline-color) !important;
+}
+
+/*Sidebar fixes:*/
+#sidebar-main {
+  margin-right: calc(var(--vertical-splitter-thickness) * -1) !important;
+}
+
+#sidebar {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/*Splitters (DO NOT TOUCH, THEY'RE LITERALLY PERFECT):*/
+.split-view-splitter {
+  background-color: unset !important;
+  width: var(--vertical-splitter-thickness) !important;
+  border: unset !important;
+}
+
+#sidebar-tools-and-extensions-splitter, #vertical-pinned-tabs-splitter {
+  background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
+  border-radius: var(--border-radius-medium) !important;
+  
+  height: var(--horizontal-splitter-thickness) !important;
+  background-clip: padding-box !important;
+  margin-block-end: 0 !important;
+  border: none !important;
+  &:hover {
+    background-color: AccentColor !important;
+  }
+}
+
+.sidebar-splitter {
+  width: var(--vertical-splitter-thickness) !important;
+  border: none !important;
+  &:hover {
+    background-color: unset !important;
+  }
+}
+
+/*Tmp:*/
