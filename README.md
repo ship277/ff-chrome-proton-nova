@@ -1,0 +1,1 @@
+Copy the stylesheet from one of the folders into userChrome.css. By default it's set to nova_no-colors_userChrome.css
