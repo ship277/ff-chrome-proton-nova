@@ -5,19 +5,20 @@
     --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
     --primary-darker: color-mix(in srgb, -moz-dialog 50%, black);
     --primary-lighter: color-mix(in srgb, -moz-dialog 75%, white);
-    /*Splitters,*/
-    --horizontal-splitter-thickness: 3px;
-    --vertical-splitter-thickness: var(--space-small);
   /*Default overrides:*/
-    /*Toolbox colors,*/
-    --toolbar-bgcolor: transparent !important; /*default: '-moz-dialog'*/
-    /*Other,*/
-    --border-radius-medium: var(--border-radius-large) !important; /*this rule controls the roundness of everything. remove it to restore default firefox roundness*/
+    --border-radius-medium: var(--border-radius-large) !important;
 }
 
 #main-window {
   background-size: cover !important;  /*for adding background-image*/
-  background-color: var(--primary-darker) !important; /*have it at --lwt-accent-color when using themes, else set it to something or keep as is*/
+  background-color: var(--primary-darker) !important;
+}
+
+body {
+  :root[lwtheme] & {
+    background-color: var(--lwt-accent-color);
+    background-image: linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor));
+  }
 }
 
 /*Browser fixes:*/
@@ -54,9 +55,17 @@
       }
     }
   }
+  :not(.browser-toolbox-background) {
+    :root[lwtheme] & {
+      background-color: unset !important;
+    }
+  }
   &:not(:has(#tabbrowser-tabs[orient="vertical"])) {
     #sidebar-main {
-      margin-inline-end: var(--space-small) !important;
+      margin-inline-end: var(--space-small);
+      &[sidebar-positionend] {
+        margin-inline-start: var(--space-small) !important;
+      }
     }
   }
 }
@@ -72,12 +81,15 @@ findbar {
 /*URL- and top bar fixes:*/
 #navigator-toolbox {
   overflow: hidden !important;
-  background-color: -moz-dialog !important;
   margin-inline: var(--space-small) !important;
   margin-block: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
+}
+
+#nav-bar {
+  border-block-start: none !important;
 }
 
 /*Tabs fixes:*/
@@ -90,10 +102,6 @@ tab {
 
 #TabsToolbar {
   margin-inline-start: var(--space-small) !important;
-}
-
-#nav-bar {
-  border-block-start: none !important;
 }
 
 #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
@@ -114,7 +122,7 @@ tab {
 /*Sidebar fixes:*/
 #sidebar-main, #sidebar-main[sidebar-launcher-expanded] {
   border: none !important;
-  background-color: -moz-dialog !important;
+  background-color: var(--toolbox-bgcolor);
   padding-block-start: var(--space-small) !important;
   margin-block-end: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
@@ -124,6 +132,9 @@ tab {
     background-image: var(--lwt-additional-images);     /*works better with some themes, worse with others. include after taste*/
     background-repeat: var(--lwt-background-tiling);
     background-position: var(--lwt-background-alignment);
+  }
+  &:-moz-window-inactive {
+    background-color: var(--toolbox-bgcolor-inactive) !important;
   }
 }
 
@@ -147,7 +158,7 @@ tab {
   background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
   border-radius: var(--border-radius-medium) !important;
   
-  height: var(--horizontal-splitter-thickness) !important;
+  height: 3px !important;
   background-clip: padding-box !important;
   margin-block-end: 0 !important;
   border: none !important;
