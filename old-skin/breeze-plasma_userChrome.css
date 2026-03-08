@@ -1,0 +1,212 @@
+/*Global overrides:*/
+:root {
+  /*Custom variables:*/
+    --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
+    /*Splitters,*/
+    --horizontal-splitter-thickness: 3px;
+  /*Default overrides:*/
+    /*URLbar colors,*/
+    --toolbar-field-background-color: Field !important;
+    --toolbar-field-border-color: var(--arrowpanel-border-color) !important;
+    
+    --urlbar-box-bgcolor: var(--light-accent) !important;
+    --urlbar-box-hover-bgcolor: var(--light-accent) !important;
+    --urlbar-box-focus-bgcolor: var(--light-accent) !important;
+    /*Toolbox colors,*/
+    --toolbar-bgcolor: -moz-dialog !important; /*default: '-moz-dialog'*/
+    --toolbox-bgcolor: var(--toolbar-bgcolor) !important;
+    --toolbox-bgcolor-inactive: var(--toolbar-bgcolor) !important;
+    /*Tabs,*/
+    --tab-hover-background-color: var(--light-accent) !important;
+    --tab-hover-outline-color: accentcolor !important;
+    /*Toolbar buttons,*/
+    --toolbarbutton-hover-background: transparent !important;
+    --toolbarbutton-active-background: var(--light-accent) !important;
+    --toolbarbutton-hover-outline-color: accentcolor !important;
+    --toolbarbutton-active-outline-color: accentcolor !important;
+    /*Sidebar tool buttons,*/
+    --button-background-color-ghost-hover: transparent !important;
+    --button-background-color-ghost-active: var(--light-accent) !important;
+    --button-background-color-hover: var(--light-accent) !important;
+    --button-background-color-active: var(--light-accent) !important;
+  
+    --button-border-color-ghost-hover: accentcolor !important;
+    --button-border-color-ghost-active: accentcolor !important;
+    --button-border-color-hover: accentcolor !important;
+    --button-border-color-active: accentcolor !important;
+    
+}
+
+@media not ((forced-colors) or (-moz-native-theme)) {
+  :root:not([lwtheme]) {
+    --color-accent-primary: accentcolor !important;
+  }
+}
+
+#main-window {
+  background-size: cover !important;  /*for adding background-image*/
+}
+
+/*Browser fixes:*/
+#browser {
+  padding-inline: var(--space-small) !important;
+  #tabbrowser-tabbox {
+    margin-block-end: var(--space-small) !important;
+    #tabbrowser-tabpanels {
+      background-color: unset !important;
+      .browserSidebarContainer {
+        padding: 1px !important;
+        .browserContainer {
+          background-color: -moz-dialog !important;
+          border-radius: var(--border-radius-medium) !important;
+          .browserStack {
+            background-color: unset !important;
+            border-radius: var(--border-radius-medium) !important;
+            [contextmenu="contentAreaContextMenu"] {
+              border-radius: var(--border-radius-medium) !important;
+            }
+          }
+        }
+      }
+      &[splitview] {
+        & .split-view-panel.split-view-panel-active {
+          margin: 0 !important;
+        }
+        :not(.deck-selected) {
+          & .browserContainer {
+            outline: 0.01px solid var(--chrome-content-separator-color) !important;
+          }
+        }
+      }
+    }
+  }
+}
+findbar {
+  border-top: none !important;
+}
+
+.devtools-toolbox-bottom-iframe {
+  border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+}
+
+/*Tabs fixes:*/
+tab {
+  &[selected="true"] .tab-background{
+    background-color: accentcolor !important;
+  }
+  .tab-icon-image {
+    transition: 0.4s ease-in-out !important;
+  }
+}
+
+#TabsToolbar {
+  margin: 0 4px !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+  tab {
+    overflow: visible !important;
+  }
+  .tab-icon-image {
+    scale: 1.4 !important;
+  }
+}
+
+tab-split-view-wrapper tab{
+  border-color: var(--tab-hover-outline-color) !important;
+}
+
+.close-icon {
+  &:hover {
+    outline: unset !important;
+  }
+}
+
+/*URL- and top bar fixes:*/
+#navigator-toolbox {
+  margin: 3px 0 2px 0!important;
+}
+
+#urlbar:hover .urlbar-background,
+[open] > .urlbar-background {
+  border-color: accentcolor !important;
+}
+
+/*Sidebar fixes:*/
+#sidebar-main {
+  margin-inline-start: calc(var(--space-small) * -1) !important;
+}
+
+/*Buttons recolor:*/
+span[type="icon"][part="button"]:not([type="icon-ghost"]) {
+    border-color: accentcolor !important;
+}
+
+.urlbar-page-action,
+.urlbar-revert-button,
+.urlbar-go-button,
+.search-go-button /*editing the variables directly would cause a huge mismatch in consistency*/{
+  &:not([disabled]):hover {
+    background-color: var(--light-accent) !important;
+    outline-color: transparent !important;
+  }
+  &:not([disabled])[open],
+  &:not([disabled]):hover:active {
+    background-color: var(--urlbar-box-active-bgcolor) !important;
+    outline-color: var(--toolbarbutton-active-outline-color) !important;
+  }
+}
+
+.identity-box-button,
+#trust-icon-container,
+#tracking-protection-icon-container {
+  &:hover:not([open="true"]) /*slightly different click behavior than the other buttons, but it's negligible*/ {
+    outline-color: transparent !important;
+  }
+}
+
+#notification-popup-box {
+  &:hover {
+    background-color: var(--light-accent) !important;
+  }
+  &:hover:active,
+  &[open] {
+    background-color: var(--light-accent) !important;
+    outline: solid 1px accentcolor !important;
+  }
+}
+
+/*Splitters:*/
+.split-view-splitter {
+  background-color: unset !important;
+  width: var(--space-small) !important;
+  border: unset !important;
+}
+
+#sidebar-tools-and-extensions-splitter, #vertical-pinned-tabs-splitter {
+  background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
+  border-radius: var(--border-radius-medium) !important;
+  
+  height: var(--horizontal-splitter-thickness) !important;
+  background-clip: padding-box !important;
+  margin-block-end: 0 !important;
+  border: none !important;
+  &:hover {
+    background-color: accentcolor !important;
+  }
+}
+
+.sidebar-splitter {
+  background-color: unset !important;
+  width: var(--space-small) !important;
+  border: none !important;
+  &:hover {
+    background-color: unset !important;
+  }
+}
+
+#sidebar-launcher-splitter {
+  margin-left: calc(var(--space-small) * -0.6) !important;
+  margin-right: calc(var(--space-small) * -0.6) !important;
+  left: calc(var(--space-small) * -0.75) !important;
+}

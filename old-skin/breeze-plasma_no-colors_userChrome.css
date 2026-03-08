@@ -1,0 +1,128 @@
+/*Global overrides:*/
+:root {
+  /*Custom variables:*/
+    --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
+    /*Splitters,*/
+    --horizontal-splitter-thickness: 3px;
+  /*Default overrides:*/
+    /*Toolbox colors,*/
+    --toolbar-bgcolor: -moz-dialog !important; /*default: '-moz-dialog'*/
+    --toolbox-bgcolor: var(--toolbar-bgcolor) !important;
+    --toolbox-bgcolor-inactive: var(--toolbar-bgcolor) !important;
+}
+
+#main-window {
+  background-size: cover !important;  /*for adding background-image*/
+}
+
+/*Browser fixes:*/
+#browser {
+  padding-inline: var(--space-small) !important;
+  #tabbrowser-tabbox {
+    margin-block-end: var(--space-small) !important;
+    #tabbrowser-tabpanels {
+      background-color: unset !important;
+      .browserSidebarContainer {
+        padding: 1px !important;
+        .browserContainer {
+          background-color: -moz-dialog !important;
+          border-radius: var(--border-radius-medium) !important;
+          .browserStack {
+            background-color: unset !important;
+            border-radius: var(--border-radius-medium) !important;
+            [contextmenu="contentAreaContextMenu"] {
+              border-radius: var(--border-radius-medium) !important;
+            }
+          }
+        }
+      }
+      &[splitview] {
+        & .split-view-panel.split-view-panel-active {
+          margin: 0 !important;
+        }
+        :not(.deck-selected) {
+          & .browserContainer {
+            outline: 0.01px solid var(--chrome-content-separator-color) !important;
+          }
+        }
+      }
+    }
+  }
+}
+findbar {
+  border-top: none !important;
+}
+
+.devtools-toolbox-bottom-iframe {
+  border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+}
+
+/*Tabs fixes:*/
+tab {
+  .tab-icon-image {
+    transition: 0.4s ease-in-out !important;
+  }
+}
+
+#TabsToolbar {
+  margin-inline-start: 4px !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+  tab {
+    overflow: visible !important;
+  }
+  .tab-icon-image {
+    scale: 1.4 !important;
+  }
+}
+
+.close-icon {
+  &:hover {
+    outline: unset !important;
+  }
+}
+
+/*URL- and top bar fixes:*/
+
+/*Sidebar fixes:*/
+#sidebar-main {
+  margin-inline-start: calc(var(--space-small) * -1) !important; /*if on left side: keep start. change to "margin-inline-end" if you want to move the sidebar to the right*/
+}
+
+/*Buttons:*/
+
+/*Splitters:*/
+.split-view-splitter {
+  background-color: unset !important;
+  width: var(--space-small) !important;
+  border: unset !important;
+}
+
+#sidebar-tools-and-extensions-splitter, #vertical-pinned-tabs-splitter {
+  background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
+  border-radius: var(--border-radius-medium) !important;
+  
+  height: var(--horizontal-splitter-thickness) !important;
+  background-clip: padding-box !important;
+  margin-block-end: 0 !important;
+  border: none !important;
+  &:hover {
+    background-color: accentcolor !important;
+  }
+}
+
+.sidebar-splitter {
+  background-color: unset !important;
+  width: var(--space-small) !important;
+  border: none !important;
+  &:hover {
+    background-color: unset !important;
+  }
+}
+
+#sidebar-launcher-splitter {
+  margin-left: calc(var(--space-small) * -0.6) !important;
+  margin-right: calc(var(--space-small) * -0.6) !important;
+  left: calc(var(--space-small) * -0.75) !important;
+}
