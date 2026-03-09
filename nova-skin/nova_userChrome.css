@@ -3,21 +3,20 @@
   /*Custom variables:*/
     /*Colors,*/
     --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
-    --primary-darker: color-mix(in srgb, -moz-dialog 50%, black);
-    --primary-lighter: color-mix(in srgb, -moz-dialog 75%, white);
-    /*Splitters,*/
-    --horizontal-splitter-thickness: 3px;
-    --vertical-splitter-thickness: var(--space-small);
+    --primary-darker: color-mix(in srgb, var(--toolbox-bgcolor) 95%, black);
+    --primary-lighter: color-mix(in srgb, var(--toolbox-bgcolor) 95%, white);
   /*Default overrides:*/
-    /*URLbar colors,*/
+    /*Toolbar/box whatever,*/
+    --toolbar-field-background-color: var(--toolbox-bgcolor) !important;
+    --toolbar-field-focus-background-color: var(--toolbox-bgcolor) !important;
     --toolbar-field-border-color: var(--chrome-content-separator-color) !important;
     
     --urlbar-box-bgcolor: var(--light-accent) !important;
     --urlbar-box-hover-bgcolor: var(--light-accent) !important;
     --urlbar-box-focus-bgcolor: var(--light-accent) !important;
-    /*Toolbox colors,*/
-    --toolbar-bgcolor: transparent !important; /*default: '-moz-dialog'*/
     /*Tabs,*/
+    --tab-selected-bgcolor: accentcolor !important;
+    --tab-selected-outline-color: transparent !important;
     --tab-hover-background-color: var(--light-accent) !important;
     --tab-hover-outline-color: accentcolor !important;
     /*Toolbar buttons,*/
@@ -35,11 +34,11 @@
     --button-border-color-ghost-active: accentcolor !important;
     --button-border-color-hover: accentcolor !important;
     --button-border-color-active: accentcolor !important;
-    
+
     /*Other,*/
     --border-radius-medium: var(--border-radius-large) !important;
-  
-  &[lwtheme] {
+
+    &[lwtheme] {
     --tab-selected-outline-color: transparent !important;
   }
 }
@@ -51,8 +50,12 @@
 }
 
 #main-window {
+  background-color: -moz-dialog !important; /*fallback*/
   background-size: cover !important;  /*for adding background-image*/
-  background-color: var(--primary-darker) !important; /*lwt-accent-color when using themes, else set it to something*/
+}
+
+body {
+  background-color: var(--primary-darker) !important;
 }
 
 /*Browser fixes:*/
@@ -89,9 +92,17 @@
       }
     }
   }
+  :not(.browser-toolbox-background) {
+    :root[lwtheme] & {
+      background-color: unset !important;
+    }
+  }
   &:not(:has(#tabbrowser-tabs[orient="vertical"])) {
     #sidebar-main {
-      margin-inline-end: var(--space-small) !important;
+      margin-inline-end: var(--space-small);
+      &[sidebar-positionend] {
+        margin-inline-start: var(--space-small) !important;
+      }
     }
   }
 }
@@ -104,10 +115,9 @@ findbar {
   border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
 }
 
-/*URL- and top bar fixes:*/
+/*URL- and top-bar fixes:*/
 #navigator-toolbox {
   overflow: hidden !important;
-  background-color: -moz-dialog !important;
   margin-inline: var(--space-small) !important;
   margin-block: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
@@ -115,16 +125,26 @@ findbar {
   box-shadow: var(--box-shadow-card);
 }
 
+#nav-bar {
+  border-block-start: none !important;
+}
+
 #urlbar:hover .urlbar-background,
 [open] > .urlbar-background {
   border-color: accentcolor !important;
 }
+#urlbar {
+  .urlbar-background {
+    box-shadow: var(--box-shadow-card) inset !important;
+  }
+  &[open] .urlbar-background {
+    box-shadow: var(--box-shadow-card) !important;
+  }
+}
+
 /*Tabs fixes:*/
 tab {
   box-shadow: vaar(--box-shadow-card) !important;
-  &[selected="true"] .tab-background{
-    background-color: accentcolor !important;
-  }
   .tab-icon-image {
     transition: 0.4s ease-in-out !important;
   }
@@ -132,10 +152,6 @@ tab {
 
 #TabsToolbar {
   margin-inline-start: var(--space-small) !important;
-}
-
-#nav-bar {
-  border-block-start: none !important;
 }
 
 #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
@@ -160,14 +176,14 @@ tab-split-view-wrapper tab{
 /*Sidebar fixes:*/
 #sidebar-main, #sidebar-main[sidebar-launcher-expanded] {
   border: none !important;
-  background-color: -moz-dialog !important;
-  padding-block-start: var(--space-small) !important;
+  background-color: var(--toolbox-bgcolor) !important;
+  padding-block-start: var(--space-xsmall) !important;
   margin-block-end: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
   :root[lwtheme] & {
-    background-image: var(--lwt-additional-images);
+    background-image: var(--lwt-additional-images);     /*works better with some themes, worse with others. include after taste*/
     background-repeat: var(--lwt-background-tiling);
     background-position: var(--lwt-background-alignment);
   }
@@ -177,10 +193,10 @@ tab-split-view-wrapper tab{
   outline-color: var(--chrome-content-separator-color) !important;
 }
 
-/*Buttons Breeze-style: (see more colors in :root)*/.chromeclass-toolbar-additional .toolbarbutton-icon {
+/*Buttons:*/
+.chromeclass-toolbar-additional .toolbarbutton-icon {
   overflow: visible !important;
 }
-
 
 span[type="icon"][part="button"]:not([type="icon-ghost"]) {
     border-color: accentcolor !important;
@@ -231,7 +247,7 @@ span[type="icon"][part="button"]:not([type="icon-ghost"]) {
   background-color: color-mix(in srgb, currentColor 25%, transparent) !important;
   border-radius: var(--border-radius-medium) !important;
   
-  height: var(--horizontal-splitter-thickness) !important;
+  height: 3px !important;
   background-clip: padding-box !important;
   margin-block-end: 0 !important;
   border: none !important;
