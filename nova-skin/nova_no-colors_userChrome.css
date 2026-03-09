@@ -3,22 +3,29 @@
   /*Custom variables:*/
     /*Colors,*/
     --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
-    --primary-darker: color-mix(in srgb, -moz-dialog 50%, black);
-    --primary-lighter: color-mix(in srgb, -moz-dialog 75%, white);
+    --primary-darker: color-mix(in srgb, var(--toolbox-bgcolor) 95%, black);
+    --primary-lighter: color-mix(in srgb, var(--toolbox-bgcolor) 95%, white);
+    --box-shadow-card-inverted: 0 -0.25px 0.75px var(--box-shadow-color-lighter-layer-1), 0 -2px 6px var(--box-shadow-color-lighter-layer-2);
   /*Default overrides:*/
+    /*Tool- bar/box,*/
+    --toolbar-field-background-color: var(--toolbox-bgcolor) !important;
+    --toolbar-field-focus-background-color: var(--toolbox-bgcolor) !important;
+    --toolbar-field-border-color: var(--chrome-content-separator-color) !important;
+  
+    -moz-headerbar: -moz-headerbarinactive !important;
+    --toolbox-bgcolor: var(--toolbox-bgcolor-inactive) !important;
+
+    /*Other,*/
     --border-radius-medium: var(--border-radius-large) !important;
 }
 
 #main-window {
   background-size: cover !important;  /*for adding background-image*/
-  background-color: var(--primary-darker) !important;
+  background-color: -moz-dialog !important;
 }
 
 body {
-  :root[lwtheme] & {
-    background-color: var(--lwt-accent-color);
-    background-image: linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor));
-  }
+  background-color: var(--primary-darker) !important;
 }
 
 /*Browser fixes:*/
@@ -88,8 +95,26 @@ findbar {
   box-shadow: var(--box-shadow-card);
 }
 
+#TabsToolbar {
+  padding-inline-start: var(--space-small) !important;
+  box-shadow: var(--box-shadow-card-inverted) inset !important;
+}
+
 #nav-bar {
   border-block-start: none !important;
+}
+
+#urlbar:hover .urlbar-background,
+[open] > .urlbar-background {
+  border-color: accentcolor !important;
+}
+#urlbar {
+  .urlbar-background {
+    box-shadow: var(--box-shadow-card) inset !important;
+  }
+  &[open] .urlbar-background {
+    box-shadow: var(--box-shadow-card) !important;
+  }
 }
 
 /*Tabs fixes:*/
@@ -100,10 +125,6 @@ tab {
   }
 }
 
-#TabsToolbar {
-  margin-inline-start: var(--space-small) !important;
-}
-
 #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
   tab {
     overflow: visible !important;
@@ -112,6 +133,7 @@ tab {
     scale: 1.4 !important;
   }
 }
+
 
 .close-icon {
   &:hover {
@@ -128,14 +150,6 @@ tab {
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
-  :root[lwtheme] & {
-    background-image: var(--lwt-additional-images);     /*works better with some themes, worse with others. include after taste*/
-    background-repeat: var(--lwt-background-tiling);
-    background-position: var(--lwt-background-alignment);
-  }
-  &:-moz-window-inactive {
-    background-color: var(--toolbox-bgcolor-inactive) !important;
-  }
 }
 
 #sidebar {

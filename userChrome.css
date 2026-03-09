@@ -3,10 +3,13 @@
   /*Custom variables:*/
     /*Colors,*/
     --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
-    --primary-darker: color-mix(in srgb, -moz-headerbar 95%, black);
-    --primary-lighter: color-mix(in srgb, -moz-headerbar 95%, white);
+    --lighter-accent: color-mix(in srgb, accentcolor 25%, transparent);
+    --primary-darker: color-mix(in srgb, -moz-dialog 85%, black);
+    --box-shadow-card-inverted: 0 -0.25px 0.75px var(--box-shadow-color-lighter-layer-1), 0 -2px 6px var(--box-shadow-color-lighter-layer-2);
   /*Default overrides:*/
-    /*Toolbar/box whatever,*/
+    /*Tool- bar/box,*/
+    --toolbox-bgcolor: -moz-dialog !important;
+    --toolbar-bgcolor: -moz-sidebar !important;
     --toolbar-field-background-color: var(--toolbox-bgcolor) !important;
     --toolbar-field-focus-background-color: var(--toolbox-bgcolor) !important;
     --toolbar-field-border-color: var(--chrome-content-separator-color) !important;
@@ -14,14 +17,12 @@
     --urlbar-box-bgcolor: var(--light-accent) !important;
     --urlbar-box-hover-bgcolor: var(--light-accent) !important;
     --urlbar-box-focus-bgcolor: var(--light-accent) !important;
-  
-    -moz-headerbarinactive: -moz-headerbar !important;
-    --toolbox-bgcolor-inactive: var(--toolbox-bgcolor) !important;
     /*Tabs,*/
     --tab-selected-bgcolor: accentcolor !important;
     --tab-selected-outline-color: transparent !important;
     --tab-hover-background-color: var(--light-accent) !important;
     --tab-hover-outline-color: accentcolor !important;
+    --box-shadow-tab: var(--box-shadow-card) !important;
     /*Toolbar buttons,*/
     --toolbarbutton-hover-background: transparent !important;
     --toolbarbutton-active-background: var(--light-accent) !important;
@@ -37,13 +38,9 @@
     --button-border-color-ghost-active: accentcolor !important;
     --button-border-color-hover: accentcolor !important;
     --button-border-color-active: accentcolor !important;
-    
     /*Other,*/
     --border-radius-medium: var(--border-radius-large) !important;
-
-    &[lwtheme] {
-      --tab-selected-outline-color: transparent !important;
-    }
+    --sidebar-border-color: var(--chrome-content-separator-color) !important;
 }
 
 @media not ((forced-colors) or (-moz-native-theme)) {
@@ -53,12 +50,8 @@
 }
 
 #main-window {
-  background-color: -moz-dialog !important; /*fallback*/
-  background-size: cover !important;  /*for adding background-image*/
-}
-
-body {
-  background-color: -moz-dialog !important;
+  background-color: var(--primary-darker) !important;
+  background-image: linear-gradient(225deg, transparent, var(--lighter-accent)) !important;
 }
 
 /*Browser fixes:*/
@@ -118,14 +111,19 @@ findbar {
   border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
 }
 
-/*URL- and top-bar fixes:*/
+/*URL- and top bar fixes:*/
 #navigator-toolbox {
+  background-image: linear-gradient(135deg, transparent, var(--lighter-accent)) !important;
   overflow: hidden !important;
   margin-inline: var(--space-small) !important;
   margin-block: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
+}
+
+#TabsToolbar {
+  padding-inline-start: var(--space-xsmall) !important;
 }
 
 #nav-bar {
@@ -147,14 +145,9 @@ findbar {
 
 /*Tabs fixes:*/
 tab {
-  box-shadow: vaar(--box-shadow-card) !important;
   .tab-icon-image {
     transition: 0.4s ease-in-out !important;
   }
-}
-
-#TabsToolbar {
-  margin-inline-start: var(--space-small) !important;
 }
 
 #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
@@ -179,21 +172,18 @@ tab-split-view-wrapper tab{
 /*Sidebar fixes:*/
 #sidebar-main, #sidebar-main[sidebar-launcher-expanded] {
   border: none !important;
-  background-color: -moz-headerbar !important;
-  padding-block-start: var(--space-xsmall) !important;
+  background-color: var(--toolbox-bgcolor) !important;
+  padding-block-start: var(--space-small) !important;
   margin-block-end: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
-  :root[lwtheme] & {
-    /*background-image: var(--lwt-additional-images);*/     /*works better with some themes, worse with others. include after taste*/
-    background-repeat: var(--lwt-background-tiling);
-    background-position: var(--lwt-background-alignment);
-  }
 }
 
 #sidebar {
-  outline-color: var(--chrome-content-separator-color) !important;
+  @media -moz-pref("sidebar.revamp") {
+      outline: 0.5px solid var(--chrome-content-separator-color) !important;
+  }
 }
 
 /*Buttons:*/
