@@ -2,30 +2,9 @@
 :root {
   /*Custom variables:*/
     /*Colors,*/
-    --light-accent: color-mix(in srgb, accentcolor 40%, transparent);
-    --primary-darker: color-mix(in srgb, var(--toolbox-bgcolor) 95%, black);
-    --primary-lighter: color-mix(in srgb, var(--toolbox-bgcolor) 95%, white);
     --box-shadow-card-inverted: 0 -0.25px 0.75px var(--box-shadow-color-lighter-layer-1), 0 -2px 6px var(--box-shadow-color-lighter-layer-2);
   /*Default overrides:*/
-    /*Tool- bar/box,*/
-    --toolbar-field-background-color: var(--toolbox-bgcolor) !important;
-    --toolbar-field-focus-background-color: var(--toolbox-bgcolor) !important;
-    --toolbar-field-border-color: var(--chrome-content-separator-color) !important;
-  
-    -moz-headerbar: -moz-headerbarinactive !important;
-    --toolbox-bgcolor: var(--toolbox-bgcolor-inactive) !important;
-
     /*Other,*/
-    --border-radius-medium: var(--border-radius-large) !important;
-}
-
-#main-window {
-  background-size: cover !important;  /*for adding background-image*/
-  background-color: -moz-dialog !important;
-}
-
-body {
-  background-color: var(--primary-darker) !important;
 }
 
 /*Browser fixes:*/
@@ -96,7 +75,7 @@ findbar {
 }
 
 #TabsToolbar {
-  padding-inline-start: var(--space-small) !important;
+  padding-inline-start: var(--space-xsmall) !important;
   box-shadow: var(--box-shadow-card-inverted) inset !important;
 }
 
@@ -104,10 +83,6 @@ findbar {
   border-block-start: none !important;
 }
 
-#urlbar:hover .urlbar-background,
-[open] > .urlbar-background {
-  border-color: accentcolor !important;
-}
 #urlbar {
   .urlbar-background {
     box-shadow: var(--box-shadow-card) inset !important;
@@ -119,7 +94,6 @@ findbar {
 
 /*Tabs fixes:*/
 tab {
-  box-shadow: vaar(--box-shadow-card) !important;
   .tab-icon-image {
     transition: 0.4s ease-in-out !important;
   }
@@ -144,12 +118,15 @@ tab {
 /*Sidebar fixes:*/
 #sidebar-main, #sidebar-main[sidebar-launcher-expanded] {
   border: none !important;
-  background-color: var(--toolbox-bgcolor);
+  background-color: var(--toolbox-bgcolor) !important;
   padding-block-start: var(--space-small) !important;
   margin-block-end: var(--space-small) !important;
   border-radius: var(--border-radius-medium) !important;
   outline: 0.01px solid var(--chrome-content-separator-color) !important;
   box-shadow: var(--box-shadow-card);
+  &:-moz-window-inactive { 
+    background-color: var(--toolbox-bgcolor-inactive) !important;
+  }
 }
 
 #sidebar {
