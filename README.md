@@ -1,4 +1,4 @@
-Copy the stylesheet from one of the folders into userChrome.css. By default it's set to nova_no-colors_userChrome.css.
+Copy the stylesheet from one of the folders into userChrome.css.
 
 For those unaccustomed with CSS customization:
 - Enable `toolkit.legacyUserProfileCustomizations.stylesheets` by browsing into about:config
@@ -8,7 +8,11 @@ For those unaccustomed with CSS customization:
 There's an old skin I made that just fixes some UI inconsistencies.
 
 > [!NOTE]
-> The colored version works bad with firefox themes and looks bad on windows as it's intended to integrate with KDE Plasma's system theme
+> The colored version works bad with firefox themes and looks bad on windows as it's intended to integrate with KDE Plasma's system theme.
+> For Windows i strongly recommend the default one (nova_no-colors_userChrome.css)
+
+Windows default preview:
+![alt text](https://github.com/ship277/ff-chrome-proton-nova/blob/master/previews/image.png?raw=true)
 
 KDE Plasma colored previews:
 ![alt text](https://github.com/ship277/ff-chrome-proton-nova/blob/master/previews/Screenshot_20260309_155859.png?raw=true)
